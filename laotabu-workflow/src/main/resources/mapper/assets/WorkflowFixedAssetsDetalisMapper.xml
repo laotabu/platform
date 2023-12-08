@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laotabu.assets.mapper.WorkflowFixedAssetsDetalisMapper">
+    
+    <resultMap type="WorkflowFixedAssetsDetalis" id="WorkflowFixedAssetsDetalisResult">
+        <result property="id"    column="id"    />
+        <result property="assetName"    column="assetName"    />
+        <result property="assetType"    column="assetType"    />
+        <result property="brand"    column="brand"    />
+        <result property="specificationAndModel"    column="specificationAndModel"    />
+        <result property="unit"    column="unit"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="estimatedAmount"    column="estimatedAmount"    />
+        <result property="assetNumber"    column="assetNumber"    />
+        <result property="originalPrice"    column="originalPrice"    />
+        <result property="reimbursementNumber"    column="reimbursementNumber"    />
+        <result property="placeOfStorage"    column="placeOfStorage"    />
+        <result property="preserverName"    column="preserverName"    />
+        <result property="preserverId"    column="preserverId"    />
+    </resultMap>
+
+    <sql id="selectWorkflowFixedAssetsDetalisVo">
+        select id, assetName, assetType, brand, specificationAndModel, unit, quantity, estimatedAmount, assetNumber, originalPrice, reimbursementNumber, placeOfStorage, preserverName, preserverId from workflow_fixed_assets_detalis
+    </sql>
+
+    <select id="selectWorkflowFixedAssetsDetalisList" parameterType="WorkflowFixedAssetsDetalis" resultMap="WorkflowFixedAssetsDetalisResult">
+        <include refid="selectWorkflowFixedAssetsDetalisVo"/>
+        <where>  
+            <if test="assetName != null  and assetName != ''"> and assetName like concat('%', #{assetName}, '%')</if>
+            <if test="assetType != null "> and assetType = #{assetType}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="specificationAndModel != null  and specificationAndModel != ''"> and specificationAndModel = #{specificationAndModel}</if>
+            <if test="unit != null "> and unit = #{unit}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="estimatedAmount != null "> and estimatedAmount = #{estimatedAmount}</if>
+            <if test="assetNumber != null  and assetNumber != ''"> and assetNumber = #{assetNumber}</if>
+            <if test="originalPrice != null "> and originalPrice = #{originalPrice}</if>
+            <if test="reimbursementNumber != null  and reimbursementNumber != ''"> and reimbursementNumber = #{reimbursementNumber}</if>
+            <if test="placeOfStorage != null  and placeOfStorage != ''"> and placeOfStorage = #{placeOfStorage}</if>
+            <if test="preserverName != null  and preserverName != ''"> and preserverName like concat('%', #{preserverName}, '%')</if>
+            <if test="preserverId != null "> and preserverId = #{preserverId}</if>
+        </where>
+    </select>
+    
+    <select id="selectWorkflowFixedAssetsDetalisById" parameterType="Long" resultMap="WorkflowFixedAssetsDetalisResult">
+        <include refid="selectWorkflowFixedAssetsDetalisVo"/>
+        where id = #{id}
+    </select>
+    <select id="getUnits" resultType="com.laotabu.assets.domain.WorkflowUnit">
+        select * from workflow_unit
+    </select>
+
+    <insert id="insertWorkflowFixedAssetsDetalis" parameterType="WorkflowFixedAssetsDetalis" useGeneratedKeys="true" keyProperty="id">
+        insert into workflow_fixed_assets_detalis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="assetName != null and assetName != ''">assetName,</if>
+            <if test="assetType != null">assetType,</if>
+            <if test="brand != null">brand,</if>
+            <if test="specificationAndModel != null and specificationAndModel != ''">specificationAndModel,</if>
+            <if test="unit != null">unit,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="estimatedAmount != null">estimatedAmount,</if>
+            <if test="assetNumber != null">assetNumber,</if>
+            <if test="originalPrice != null">originalPrice,</if>
+            <if test="reimbursementNumber != null">reimbursementNumber,</if>
+            <if test="placeOfStorage != null and placeOfStorage != ''">placeOfStorage,</if>
+            <if test="preserverName != null and preserverName != ''">preserverName,</if>
+            <if test="preserverId != null">preserverId,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="assetName != null and assetName != ''">#{assetName},</if>
+            <if test="assetType != null">#{assetType},</if>
+            <if test="brand != null">#{brand},</if>
+            <if test="specificationAndModel != null and specificationAndModel != ''">#{specificationAndModel},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="estimatedAmount != null">#{estimatedAmount},</if>
+            <if test="assetNumber != null">#{assetNumber},</if>
+            <if test="originalPrice != null">#{originalPrice},</if>
+            <if test="reimbursementNumber != null">#{reimbursementNumber},</if>
+            <if test="placeOfStorage != null and placeOfStorage != ''">#{placeOfStorage},</if>
+            <if test="preserverName != null and preserverName != ''">#{preserverName},</if>
+            <if test="preserverId != null">#{preserverId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWorkflowFixedAssetsDetalis" parameterType="WorkflowFixedAssetsDetalis">
+        update workflow_fixed_assets_detalis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="assetName != null and assetName != ''">assetName = #{assetName},</if>
+            <if test="assetType != null">assetType = #{assetType},</if>
+            <if test="brand != null">brand = #{brand},</if>
+            <if test="specificationAndModel != null and specificationAndModel != ''">specificationAndModel = #{specificationAndModel},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="estimatedAmount != null">estimatedAmount = #{estimatedAmount},</if>
+            <if test="assetNumber != null">assetNumber = #{assetNumber},</if>
+            <if test="originalPrice != null">originalPrice = #{originalPrice},</if>
+            <if test="reimbursementNumber != null">reimbursementNumber = #{reimbursementNumber},</if>
+            <if test="placeOfStorage != null and placeOfStorage != ''">placeOfStorage = #{placeOfStorage},</if>
+            <if test="preserverName != null and preserverName != ''">preserverName = #{preserverName},</if>
+            <if test="preserverId != null">preserverId = #{preserverId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWorkflowFixedAssetsDetalisById" parameterType="Long">
+        delete from workflow_fixed_assets_detalis where id = #{id}
+    </delete>
+
+    <delete id="deleteWorkflowFixedAssetsDetalisByIds" parameterType="String">
+        delete from workflow_fixed_assets_detalis where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

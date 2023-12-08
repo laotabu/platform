@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laotabu.assets.mapper.WorkflowFixedAssetsTitleMapper">
+    
+    <resultMap type="WorkflowFixedAssetsTitle" id="WorkflowFixedAssetsTitleResult">
+        <result property="id"    column="id"    />
+        <result property="serialNumber"    column="serialNumber"    />
+        <result property="applicant"    column="applicant"    />
+        <result property="applicationDate"    column="applicationDate"    />
+        <result property="department"    column="department"    />
+        <result property="projectName"    column="projectName"    />
+        <result property="projectCode"    column="projectCode"    />
+        <result property="projectType"    column="projectType"    />
+        <result property="fundCategory"    column="fundCategory"    />
+        <result property="demandTime"    column="demandTime"    />
+        <result property="outlineOfReasons"    column="outlineOfReasons"    />
+        <result property="detailsOfReason"    column="detailsOfReason"    />
+        <result property="enableIdentificationProcessing"    column="enableIdentificationProcessing"    />
+        <result property="listOfAssetsStr"    column="listOfAssets"    />
+        <result property="attachments"    column="attachments"    />
+        <result property="configurationAdvice"    column="configurationAdvice"    />
+    </resultMap>
+
+    <sql id="selectWorkflowFixedAssetsTitleVo">
+        select id, serialNumber, applicant, applicationDate, department, projectName, projectCode, projectType, fundCategory, demandTime, outlineOfReasons, detailsOfReason, enableIdentificationProcessing, ListOfAssets, attachments, configurationAdvice from workflow_fixed_assets_title
+    </sql>
+
+    <select id="selectWorkflowFixedAssetsTitleList" parameterType="WorkflowFixedAssetsTitle" resultMap="WorkflowFixedAssetsTitleResult">
+        <include refid="selectWorkflowFixedAssetsTitleVo"/>
+        <where>  
+            <if test="serialNumber != null "> and serialNumber = #{serialNumber}</if>
+            <if test="applicant != null  and applicant != ''"> and applicant = #{applicant}</if>
+            <if test="applicationDate != null "> and applicationDate = #{applicationDate}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="projectName != null  and projectName != ''"> and projectName like concat('%', #{projectName}, '%')</if>
+            <if test="projectCode != null  and projectCode != ''"> and projectCode = #{projectCode}</if>
+            <if test="projectType != null  and projectType != ''"> and projectType = #{projectType}</if>
+            <if test="fundCategory != null  and fundCategory != ''"> and fundCategory = #{fundCategory}</if>
+            <if test="demandTime != null "> and demandTime = #{demandTime}</if>
+            <if test="outlineOfReasons != null  and outlineOfReasons != ''"> and outlineOfReasons = #{outlineOfReasons}</if>
+            <if test="detailsOfReason != null  and detailsOfReason != ''"> and detailsOfReason = #{detailsOfReason}</if>
+            <if test="enableIdentificationProcessing != null "> and enableIdentificationProcessing = #{enableIdentificationProcessing}</if>
+            <if test="listOfAssetsStr != null  and listOfAssetsStr != ''"> and listOfAssets = #{listOfAssetsStr}</if>
+            <if test="attachments != null  and attachments != ''"> and attachments = #{attachments}</if>
+            <if test="configurationAdvice != null  and configurationAdvice != ''"> and configurationAdvice = #{configurationAdvice}</if>
+        </where>
+    </select>
+    
+    <select id="selectWorkflowFixedAssetsTitleById" parameterType="Long" resultMap="WorkflowFixedAssetsTitleResult">
+        <include refid="selectWorkflowFixedAssetsTitleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertWorkflowFixedAssetsTitle" parameterType="WorkflowFixedAssetsTitle" useGeneratedKeys="true" keyProperty="id">
+        insert into workflow_fixed_assets_title
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="serialNumber != null">serialNumber,</if>
+            <if test="applicant != null and applicant != ''">applicant,</if>
+            <if test="applicationDate != null">applicationDate,</if>
+            <if test="department != null">department,</if>
+            <if test="projectName != null">projectName,</if>
+            <if test="projectCode != null">projectCode,</if>
+            <if test="projectType != null">projectType,</if>
+            <if test="fundCategory != null">fundCategory,</if>
+            <if test="demandTime != null">demandTime,</if>
+            <if test="outlineOfReasons != null and outlineOfReasons != ''">outlineOfReasons,</if>
+            <if test="detailsOfReason != null and detailsOfReason != ''">detailsOfReason,</if>
+            <if test="enableIdentificationProcessing != null">enableIdentificationProcessing,</if>
+            <if test="ListOfAssets != null and ListOfAssets != ''">ListOfAssets,</if>
+            <if test="attachments != null">attachments,</if>
+            <if test="configurationAdvice != null">configurationAdvice,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="serialNumber != null">#{serialNumber},</if>
+            <if test="applicant != null and applicant != ''">#{applicant},</if>
+            <if test="applicationDate != null">#{applicationDate},</if>
+            <if test="department != null">#{department},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="projectCode != null">#{projectCode},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="fundCategory != null">#{fundCategory},</if>
+            <if test="demandTime != null">#{demandTime},</if>
+            <if test="outlineOfReasons != null and outlineOfReasons != ''">#{outlineOfReasons},</if>
+            <if test="detailsOfReason != null and detailsOfReason != ''">#{detailsOfReason},</if>
+            <if test="enableIdentificationProcessing != null">#{enableIdentificationProcessing},</if>
+            <if test="ListOfAssets != null and ListOfAssets != ''">#{ListOfAssets},</if>
+            <if test="attachments != null">#{attachments},</if>
+            <if test="configurationAdvice != null">#{configurationAdvice},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWorkflowFixedAssetsTitle" parameterType="WorkflowFixedAssetsTitle">
+        update workflow_fixed_assets_title
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="serialNumber != null">serialNumber = #{serialNumber},</if>
+            <if test="applicant != null and applicant != ''">applicant = #{applicant},</if>
+            <if test="applicationDate != null">applicationDate = #{applicationDate},</if>
+            <if test="department != null">department = #{department},</if>
+            <if test="projectName != null">projectName = #{projectName},</if>
+            <if test="projectCode != null">projectCode = #{projectCode},</if>
+            <if test="projectType != null">projectType = #{projectType},</if>
+            <if test="fundCategory != null">fundCategory = #{fundCategory},</if>
+            <if test="demandTime != null">demandTime = #{demandTime},</if>
+            <if test="outlineOfReasons != null and outlineOfReasons != ''">outlineOfReasons = #{outlineOfReasons},</if>
+            <if test="detailsOfReason != null and detailsOfReason != ''">detailsOfReason = #{detailsOfReason},</if>
+            <if test="enableIdentificationProcessing != null">enableIdentificationProcessing = #{enableIdentificationProcessing},</if>
+            <if test="ListOfAssets != null and ListOfAssets != ''">ListOfAssets = #{ListOfAssets},</if>
+            <if test="attachments != null">attachments = #{attachments},</if>
+            <if test="configurationAdvice != null">configurationAdvice = #{configurationAdvice},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteWorkflowFixedAssetsTitleById" parameterType="Long">
+        delete from workflow_fixed_assets_title where id = #{id}
+    </delete>
+
+    <delete id="deleteWorkflowFixedAssetsTitleByIds" parameterType="String">
+        delete from workflow_fixed_assets_title where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
